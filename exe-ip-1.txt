@@ -1,0 +1,409 @@
+1.CREATE A WEB PAGE TO EMBED A MAP IN A WEB PAGE AND TO FIX THE
+HOT SPOTS
+
+Program:
+India.html
+
+<html>
+<head>
+<title>India Map</title> <head>
+<body bgcolor="PINK">
+<font face="Monotype Corsiva" color="BLUE" size="6"> <marquee direction="left"
+behavior="alternate">INDIA MAP </marquee>
+</font>
+<hr size="6" color="RED"> <map name="pagemap">
+area shape="circle" coords="223,236,5" href="delhi.html"> <area shape="circle"
+coords="483,381,5" href="calcutta.html"> <area shape="circle"
+coords="120,475,5" href="mumbai.html"> <area shape="circle"
+coords="300,625,5" href="chennai.html">
+</map>
+<img src="indiamap.jpeg" usemap="#pagemap" > </body>
+<font color="#ff0000" size="5">
+<p><b>Hints:</b><i>Click on the Name of the Cities in the map to know its
+description</i></p>
+</html>
+-------------------
+Delhi.html
+<html>
+<body bgcolor="SKYBLUE">
+<font face="Monotype Corsiva" size="18" color="RED">
+<center><b><i><tt>Delhi is the capital of our INDIA<br> and <br>More IT
+companies are Camped at Delhi</tt></i></b></center>
+<a href="india.html">Home Page</a> </font>
+</body>
+</html>
+
+Mumbai.html
+<html>
+<body bgcolor="DARKGREEN">
+<font face="Times New Roman" size="12" color="RED">
+<center>MUMBAI is the capital of Maharashtra<br> and <br>it has Famous India
+Gate</center>
+<a href="india.html">Home Page</a> </font>
+</body>
+</html>
+-----------
+Calcutta.html
+<html>
+<body bgcolor="SKYBLUE">
+<font face="Times New Roman" size="18" color="RED">
+<center><b><i>Calcutta is the wealthy city in WEST BENGAL<br> and <br>it has
+Famous "Sunderbans Forests"</i></b></center>
+<a href="india.html">Home Page</a> </font></body></html>
+------------
+Chennai.html
+<html>
+<body bgcolor="BLACK">
+<font face="Times New Roman" size="12" color="RED">
+<center>Chennai is hte capital of Tamil Nadu<br> and <br>More IT companies are camped at Chennai</center>
+<a href="india.html">Home Page</a>
+</font></body></html>
+---------------------------------------------------------
+--------------------------------------------------
+2.WEB PAGE USING CASCADING STYLE SHEETS (CSS)
+
+Department.html
+<html>
+<head>
+<title> Anjalai Ammal Mahalingam Engineering College </title>
+<link rel="stylesheet" href="E:/css/main.css" type="text/css">
+<style>
+body {
+ background-color: linen;
+}
+h1 {
+ color: maroon;
+ margin-left: 40px;
+}
+table, th, td {
+ border: 1px solid black;
+}
+</style>
+</head>
+<body>
+<marquee> <img src = "index.jpg" style="width:50px;height:50px;"><h1> Anjalai Ammal Mahalingam Engineering College </h1> </marquee><br>
+<table>
+<tbody>
+<tr><th id=1>Degree</th><th id=1>Branch</th><th id=1>Strength</th></tr><tr><td>BE</td><td>CSE</td><td>60</td></tr>
+<tr><td>ME</td><td>CSE</td><td>18</td></tr>
+<tr><td>BE</td><td>EEE</td><td>120</td></tr>
+<tr><td>ME</td><td>PED</td><td>18</td></tr>
+<tr><td>BE</td><td>ECE</td><td>120</td></tr>
+<tr><td>BTech</td><td>IT</td><td>60</td></tr>
+<tr><td>ME</td><td>SWE</td><td>18</td></tr>
+<tr><td>BE</td><td>MECH</td><td>60</td></tr>
+<tr><td>ME</td><td>CAD/CAM</td><td>18</td></tr>
+</tbody>
+</table>
+</body>
+</html>
+-------------
+Home.html
+<html>
+<head>
+<title> Anjalai Ammal Mahalingam Engineering College </title>
+<link rel="stylesheet" href="css/main.css" style="text/css">
+</head>
+<frameset cols="20%,*" noresize="noresize" name="home">
+<frame name="link" src="link.html">
+<frame name="display" src="sit.html">
+</frameset>
+</html>
+------------
+Sit.html
+<html>
+<head>
+<title> Anjalai Ammal Mahalingam Engineering College </title>
+<link rel="stylesheet" href="css/main.css" type="text/css">
+<style>
+p.important{font-family:"Tahoma"; border:solid; border-width:thin;
+width:100%;color:blue}
+</style>
+</head>
+<body>
+<marquee>imgsrc=" /index.jpg"style="width:50px;height:50px;"><h3>Welcome to Anjalai Ammal Mahalingam Engineering college </h3> </marquee><p>
+Anjalai Ammal Mahalingam Engineering College underpins the excellent reputation of translating mental conception into reality and germinates in the young minds to excel traditionally and academically through innovations. The institute landscapes personal development, social values and the entrepreneurial attitudes
+</p> </body> </html>
+---------
+Link.html
+<html>
+<link rel="stylesheet" href="E:/css/main.css">
+<body>
+<ul>
+<li><bullet><a href="sit.html" target="display">Home Page</a></bullet></li><li><a href="department.html" target="display">Departments</a></li></ul>
+</body>
+--------
+Main.css
+BODY
+{
+FONT-SIZE: 1em;
+MARGIN-LEFT: 5%;
+COLOR: #099669;
+TEXT-INDENT: 3em;
+MARGIN-RIGHT: 5%;
+FONT-STYLE: italic;
+FONT-FAMILY: verdana, sans serif
+}
+H1
+{
+COLOR: #000088;
+FONT-FAMILY: tahoma
+}
+H2
+{
+COLOR: #000099;
+FONT-FAMILY: tahoma
+}
+TH#1
+{
+FONT-SIZE: 2em;
+TEXT-TRANSFORM: uppercase;
+COLOR: maroon;
+FONT-FAMILY: Arial, 'Arial Black', 'Arial Greek';
+TEXT-ALIGN: center
+}
+SPAN.underline
+{
+TEXT-DECORATION: underline
+}
+SPAN.highlight
+{
+COLOR: black;
+BACKGROUND-COLOR: transparent
+}
+</html>
+
+---------------------------------------------------------
+----------------------------------------------------------
+3.REGISTRATION,LOGIN FORM
+
+Registration.html
+
+<html> 
+<head><title> 
+register</title> 
+<SCRIPT LANGUAGE="JAVASCRIPT"> 
+function essentials_of_validation(form1) 
+{ 
+var return_value=true; 
+var username1=form1.txtusername1.value; 
+var username2=form1.txtusername2.value; 
+var password1=form1.txtpassword1.value; 
+var password2=form1.txtpassword2.value; 
+if(username1.length < 8) 
+{ 
+return_value=false; 
+window.alert("user name less than 8 chars"); 
+} 
+if(username1==username2) 
+{ 
+return_value=false; 
+window.alert("both ids are same"); 
+form1.txtusername2.value=""; 
+} 
+if(password1.length<6) 
+{ 
+return_value=false; 
+window.alert(" pwd should be > 6 char's "); 
+form1.txtpassword1.value=""; 
+form1.txtpassword2.value=""; 
+} 
+if(password1!=password2) 
+{ 
+return_ value=false; 
+window.alert("ur password mismatched "); 
+form1.txtpassword1.value=""; 
+form1.txtpassword2.value=""; 
+} 
+return return_value; 
+} 
+</script> 
+</head> 
+<body BGCOLOR="pink"> 
+<CENTER><u> 
+<marquee><font name="mistral" size="+1">REGISTRATION FORM</font></marquee> 
+</u></center> 
+<form name="form1" onSubmit="essentials_of_validation(this)"> 
+Name:<input name="name" type="text" size="10"> 
+<br> 
+Age:<input type="text" size="3"> 
+<br> 
+Sex:<br> 
+<input name ="gen" type="radio" value="male">male 
+<input name="gen" type="radio" value="female">female 
+<br> 
+Address:<textarea name="address" rows="3" cols="3"></textarea> 
+<br> 
+Enter e-mail id u want :<sup>*</sup> 
+<input type="text" name="txtusername1" size="15"> 
+<br> 
+Password:<sup>*</sup> 
+<input type="Password" name="txtpassword1" size="15">(password should exceed 6 characters) 
+<br> 
+Confirm password:<input type="password" name="txtpassword2" size=20> 
+<br> 
+Alternate mail:<sup>*</sup> 
+<input type="text" name="txtusername2" size="15"> 
+<br> 
+Known This Site Through 
+<br> 
+<input name="things" type="checkbox" value="srts"> internet 
+<input name="things" type="checkbox" value="sp">newspapers 
+<input name="things" type="checkbox" value="spor"> friends 
+<br> 
+Rate ur site 
+<select name="rating"> 
+<option selected>good 
+<option>average 
+<option>bad 
+<option>no rating 
+</select><br> 
+Enter the code<input name="code" type="text" size="5"> 
+<table border="1" width="10%" height="10%"> 
+<thead><tr><th> 
+1123</th></tr> 
+</thead> 
+</table> 
+<br> 
+<input type="submit" value="submit "> 
+<input type ="reset" value="clear ur entries"> 
+</form> 
+<font size="+1"> 
+<A Href="card.html">Home</A> 
+<A Href="Login.html">Login</A> 
+</font> 
+</body> 
+</html> 
+-------------
+Login.html
+
+<html>
+<head>
+<SCRIPT LANGUAGE="JAVASCRIPT">
+function essentials_of_validation(form1)
+{
+var return_value=true;
+var username=form1.txtusername.value;
+var password1=form1.txtpassword1.value;
+var password2=form1.txtpassword2.value;
+if(username.length < 8)
+{
+return_value=false;
+window.alert("user name less thn 8 chars");
+}
+if(password1.length<6)
+{
+return_value=false;
+window.alert(" pwd should be > 6 char's ");
+form1.txtpassword1.value="";
+form1.txtpassword2.value="";
+}
+if(password1!=password2)
+{
+return_value=false;
+window.alert("ur password mismatched ");
+form1.txtpassword1.value="";
+form1.txtpassword2.value="";
+}
+return return_value;
+}
+</script>
+</head>
+<body bgcolor="skyblue">
+<marquee><b><u><font face="comic sans ms" color="light blue">login here</font></u></b></marquee>
+<form name="form1" onSubmit="essentials_of_validation(this)">
+Username <input type="text" name="txtusername" size=20>
+<br>Password: <input type="password" name="txtpassword1" size=20>
+<br>Confirm password:<input type="password" name="txtpassword2" size=20>
+<br><br>
+<input type="submit" value="submit">
+<input type="reset" value="reset">
+</form>
+</body>
+</html>
+----------------------------------------------
+card.html
+<html>
+<head><title>
+payment</title>
+<SCRIPT LANGUAGE="JAVASCRIPT">
+function essentials_of_validation(form1)
+{
+var current=new Date();
+var return_value=true;
+var username=form1.txtusername.value;
+var password1=form1.txtpassword1.value;
+var a=form1.dd.value;
+var b=form1.mm.value;
+var c=form1.yyyy.value;
+if(isNaN(username))
+{
+window.alert("Not a valid account number");
+}
+if(a<32 && b<13&& c>=current.getFullYear())
+{
+if(c>current.getFullYear())
+{
+window.alert(" you are validated");
+}
+else if(c=current.getFullYear())
+{
+if(b>current.getMonth())
+{
+window.alert(" you are validated");
+}
+else if(b=current.getMonth())
+{
+if(a>current.getDate())
+{
+window.alert("you are validated");
+}
+}
+}
+else
+{
+window.alert("Your card has expired");
+}
+}
+else
+{
+window.alert(" card has expired");
+}
+}
+</script>
+</head>
+<body bgcolor="pink">
+<marquee><strong>Enjoy the Shopping with special Offers</strong></marquee>
+<form name="form1" onSubmit="essentials_of_validation(this)">
+<font size="+2">
+Payment Through
+<br>
+<input name="pay" type="radio" >Credit card
+<input name="pay" type="radio" >Debit card
+<br>
+Bank
+<select name="bank">
+<option selected>sbi
+<option>HSBC
+<option>ICICI
+<option>others
+</select>
+<br>
+Account/Card number:
+<input name="txtusername" type="textbox">
+<br>
+Net banking id/Password<input name="txtpassword1" type="password">
+<br>
+Enter date of expiryof account/card<input name="dd" type="text" size=2>(dd)
+<input name="mm" type="text" size=2>(mm)
+<input name="yyyy" type="text" size=4>(yyyy)
+<br>
+<input type="submit" value="Accept">
+<input type="reset" value="Reject">
+</form>
+<A Href="login.html">Home</A>
+<br><A Href="card.html">back</A>
+</body>
+</html>
+----------------------------------------------------------
+------------------------------------------------------

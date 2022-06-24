@@ -1,0 +1,508 @@
+4.Invoke servlet , Session tracking and Hidden form fields
+
+Program:
+i. To invoke servlets from HTML forms
+
+index.html:
+<html>
+<head>
+<title>Invoking Servlet from HTML</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<form method="get" action="http://localhost:8080/WebApplication1/NewServlet"><input type="submit" value="Invoke Servlet">
+</form>
+</body>
+</html>
+----------------------
+
+NewServlet.java:
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet(urlPatterns = {"/NewServlet"})
+public class NewServlet extends HttpServlet {
+ protected void processRequest(HttpServletRequest request, HttpServletResponse
+response)
+ throws ServletException, IOException {
+response.setContentType("text/html;charset=UTF-8");
+ try (PrintWriter out = response.getWriter()) {
+out.println("<!DOCTYPE html>");
+out.println("<html>");
+out.println("<head>");
+out.println("<title> Hi this is NewServlet</title>");
+out.println("</head>");
+out.println("<body>");
+out.println("<h3>This is servelt page</h3>") ;
+out.println("</body>");
+out.println("</html>");
+ }
+ }
+ @Override
+ protected void doGet(HttpServletRequest request, HttpServletResponse response)
+ throws ServletException, IOException {
+processRequest(request, response);
+ }
+ @Override
+ protected void doPost(HttpServletRequest request, HttpServletResponse response)
+ throws ServletException, IOException {
+processRequest(request, response);
+ }
+ @Override
+ public String getServletInfo() {
+ return "Short description";
+ }
+}
+-------
+ii. Session tracking using hidden form fields
+
+index.html:
+<html>
+<head>
+<title>TODO supply a title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<form action="http://localhost:8080/WebApplication1/FirstServlet">
+Name:<input type="text" name="userName"/><br/>
+<input type="submit" value="go"/>
+</form>
+</body>
+</html>
+-----------
+FirstServlet.java
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet(urlPatterns = {"/FirstServlet"})
+public class FirstServlet extends HttpServlet {
+ protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+response.setContentType("text/html;charset=UTF-8");
+ try (PrintWriter out = response.getWriter()) {
+ String n=request.getParameter("userName");
+out.print("Welcome "+n);
+out.print("<form action='http://localhost:8080/WebApplication1/SecondServlet'>");
+out.print("<input type='hidden' name='uname' value='"+n+"'>");
+out.print("<input type='submit' value='go'>");
+out.print("</form>");
+out.close();
+ }
+ }
+ @Override
+ protected void doGet(HttpServletRequest request, HttpServletResponse response)
+ throws ServletException, IOException {
+processRequest(request, response);
+ }
+ @Override
+ protected void doPost(HttpServletRequest request, HttpServletResponse response)
+ throws ServletException, IOException {
+processRequest(request, response);
+ }
+ @Override
+ public String getServletInfo() {
+ return "Short description";
+ }
+}
+------------
+SecondServlet.java:
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet(urlPatterns = {"/SecondServlet"})
+public class SecondServlet extends HttpServlet {
+ protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+response.setContentType("text/html;charset=UTF-8");
+ try (PrintWriter out = response.getWriter()) {
+ String n=request.getParameter("uname");
+out.print("Hello "+n);
+out.close();
+ }
+ }
+ @Override
+ protected void doGet(HttpServletRequest request, HttpServletResponse response)
+ throws ServletException, IOException {
+processRequest(request, response);
+ }
+ @Override
+ protected void doPost(HttpServletRequest request, HttpServletResponse response)
+ throws ServletException, IOException {
+processRequest(request, response);
+ }
+ @Override
+ public String getServletInfo() {
+ return "Short description";
+ }// </editor-fold>
+}
+-----------
+
+iii.Session tracking for a hit count
+hitcount.java
+
+
+import java.io.*;
+import java.util.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+public class hitcount extends HttpServlet {
+ public void doGet(HttpServletRequest req, HttpServletResponse res)
+ throws ServletException, IOException {
+ res.setContentType("text/html");
+ PrintWriter out = res.getWriter();
+ // Get the current session object, create one if necessary
+ HttpSession session = req.getSession();
+ // Increment the hit count for this page. The value is saved
+ // in this client's session under the name "tracker.count".
+ Integer count = (Integer)session.getAttribute("tracker.count");
+ if (count == null)
+ count = new Integer(1);
+ else
+ count = new Integer(count.intValue() + 1);
+ session.setAttribute("tracker.count", count);
+ out.println("<HTML><HEAD><TITLE>SessionTracker</TITLE></HEAD>"
+);
+ out.println("<BODY><H1>Session Tracking Demo</H1>");
+ // Display the hit count for this page
+ out.println("You've visited this page " + count +
+ ((count.intValue() == 1) ? " time." : " times."));
+ out.println("<P>");
+ out.println("<H2>Here is your session data:</H2>");
+ Enumeration enam = session.getAttributeNames();
+ while (enam.hasMoreElements()) {
+ String name = (String) enam.nextElement();
+ out.println(name + ": " + session.getAttribute(name) + "<BR>");
+ }
+ out.println("</BODY></HTML>");
+ }
+}
+--------------------------------------------------------
+----------------------------------------------------------
+
+5.Online Examination
+
+Program:
+Login.html
+
+<html>
+ <head>
+ <title>exam portal</title>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> </head>
+ <body>
+ <div style="text-align: center">
+ <h3>ESEC ONLINE EXAM PORTAL -Login </h3>
+ <hr>
+ <form method ="get" action="acceptuser.jsp">
+ Username <input type="text" name="uname" value=""><br><br>
+ Password <input type="password" name="pass" value=""><br>
+ <button type="submit">LOGIN </button>
+ </form>
+ </div>
+ </body>
+</html>
+-----
+
+acceptuser.jsp
+
+<%@ page import="java.sql.*"%>
+<%@ page import="java.util.*"%>
+<%!
+ Connection con;
+ PreparedStatement ps1, ps2;
+ public void jspInit()
+ {
+ try
+ {
+ //loading the driver
+ Class.forName("com.mysql.jdbc.Driver").newInstance();
+ //establish the connection
+ con =
+DriverManager.getConnection("jdbc:mysql://localhost:3306/iplab","root","");
+ //create statement object
+ ps1 = con.prepareStatement("select count(*) from users where username = ?
+and
+password=?");
+ ps2 = con.prepareStatement("select * from users");
+ }
+ catch(Exception ex)
+ {
+ ex.printStackTrace();
+}
+ }
+%>
+<%
+ String param = request.getParameter("s1");
+ if(param =="link")
+ {
+ ResultSet rs = ps2.executeQuery();
+ out.println("<table>");
+ while(rs.next())
+ {
+ out.println("<tr>");
+ out.println("<td>"+rs.getString(1)+"</td>");
+ out.println("<td>"+rs.getString(2)+"</td");
+ out.println("</tr>");
+ }
+ out.println("</table>");
+ rs.close();
+ }
+ else
+ {
+ //write jdbc code for authentication
+ String user = request.getParameter("uname");
+ String pass = request.getParameter("pass");
+ //set form data as param value
+ ps1.setString(1,user);
+ ps1.setString(2,pass);
+ //excute the query
+ ResultSet rs = ps1.executeQuery();
+ int cnt = 0;
+ if (rs.next())
+ cnt = rs.getInt(1);
+ if(cnt == 0)
+ out.println("<b><i><font color=red>Invalid credential</fonr></i></b>");
+ else
+ {
+ out.println("<form><fieldset style= width:25%; >");
+ out.println("<b><i><font color=red>valid credential..</fonr></i></b><br>");
+ out.println("<b><i><a href=examclient.html><font size=6 color=blue>Click
+Here to
+take test</fonr></i></a></b>");
+ out.println("</fieldset></form>");
+ }
+ }
+%>
+<%!
+ public void jspDestroy()
+ {
+ try
+ {
+ //colse
+ps1.close();
+ ps2.close();
+ con.close();
+ }
+ catch(Exception ex)
+ {
+ ex.printStackTrace();
+ }
+ }
+%>
+-------
+Examclient.html
+
+<html>
+<head>
+<title>Online Exam Client</title>
+</head>
+<body>
+<h2 style="text-align:center">ONLINE EXAMINATION</h2>
+<h3>Answer the following questions (5 marks for each correct answer)</h3><hr/>
+<form name="examForm" method="post" action="ExamServer.jsp">1.Who is called as the father of computer?<br/>
+<input type="radio" name="ans1" value="Sachin">Sachin
+<input type="radio" name="ans1" value="Stuart">Stuart
+<input type="radio" name="ans1" value="Charles Babbage">Charles Babbage<input type="radio" name="ans1" value="Napier">Napier
+<br/><br/>
+2.C++ was developed by?<br/>
+<input type="radio" name="ans2" value="Dennis Ritchie">Dennis Ritchie<input type="radio" name="ans2" value="None">None
+<input type="radio" name="ans2" value="David Ritchie">David Ritchie
+<input type="radio" name="ans2" value="John">John
+<br/><br/>
+3.C was developed by?<br/>
+<input type="radio" name="ans3" value="Dennis Ritchie">Dennis Ritchie<input type="radio" name="ans3" value="Stroustrup">Stroustrup
+<input type="radio" name="ans3" value="David Ritchie">David Ritchie<input type="radio" name="ans3" value="Charles Babbage">Charles Babbage<br/><br/>
+<input type="submit" value="Check Your Result"/>
+</form>
+</body>
+</html>
+---------------
+Examserver.jsp
+
+
+<%@page contentType="text/html" language="java" import="java.sql.*"%><html>
+<head>
+<title>Online Exam Server</title>
+<style type="text/css">
+ body{background-color:white;font-family:courier;color:blue}
+</style>
+</head>
+<body>
+<h2 style="text-align:center">ONLINE EXAMINATION</h2>
+<p>
+<a href="ExamClient.html">Back To Main Page</a>
+</p>
+<hr/>
+<%
+String str1=request.getParameter("ans1");
+String str2=request.getParameter("ans2");
+String str3=request.getParameter("ans3");
+int mark=0;
+Class.forName("com.mysql.jdbc.Driver").newInstance();
+Connection
+con=DriverManager.getConnection("jdbc:mysql://localhost:3306/iplab","root",
+"");
+Statement stmt=con.createStatement();
+ResultSet rs=stmt.executeQuery("SELECT * FROM examTab");
+int i=1;
+while(rs.next())
+{
+ if(i==1)
+ {
+ String dbans1=rs.getString(1);
+ if(str1.equals(dbans1))
+ {
+ mark=mark+5;
+ }
+ }
+ if(i==2)
+ {
+ String dbans2=rs.getString(1);
+ if(str2.equals(dbans2))
+ {
+ mark=mark+5;
+ }
+ }
+ if(i==3)
+ {
+ String dbans3=rs.getString(1);
+ if(str3.equals(dbans3))
+ {
+ mark=mark+5;
+Lab Manual2
+ESEC /CSE/R2017CS8661 Internet Programming Laboratory
+ }
+ }
+ i++;
+}
+if(mark>=10)
+{
+ out.println("<h4>Your Mark Is : "+mark+"</h4>");
+ out.println("<h3>Congratulations....! You Are Eligible For The Next
+Round...</h3>");
+}
+else
+{
+ out.println("<h4>Your Mark is : "+mark+"</h4>");
+ out.println("<h3>Sorry....!! You Are Not Eligible For The Next Round...</h3>");
+}
+%>
+</form>
+</body>
+</html>
+
+----------------------------------------------
+-----------------------------------------------------
+
+6. Shopping Cart
+
+Program:
+ShoppingCart.java:
+
+
+import java.io.*;
+import javax.servlet.ServletException;
+import javax.servlet.http.*;
+import java.util.Enumeration;
+import javax.servlet.annotation.WebServlet;
+@WebServlet(urlPatterns = {"/ShoppingCart"})
+public class ShoppingCart extends HttpServlet {
+String [] items = new String [] {
+ "Samsung A30", "MI 108 CM Android TV",
+ "HP USB Pend Drive 32GB", "DELL Core i5, 8GB RAM, 1TB HDD Laptop" };
+ protected void processRequest(HttpServletRequest request,
+HttpServletResponse response)
+ throws ServletException, IOException {
+ response.setContentType("text/html;charset=UTF-8");
+ PrintWriter out = response.getWriter();
+ out.println("<center><h3>ABC SHOPPING CART </h3></center>");
+ out.println("<hr>");
+ // get or create the session information
+ HttpSession session = request.getSession();
+ int [] purchases = (int [])session.getAttribute("purchases");
+ if ( purchases == null ) {
+ purchases = new int [ items.length ];
+ session.setAttribute( "purchases", purchases );
+ }
+ out.println( "<html><head><title>Shopping Cart</title>"
+ + "</title></head><body><p>" );
+ if ( request.getParameter("checkout") != null )
+ out.println("<h1>Thanks for ordering!</h1>");
+ else {
+ if ( request.getParameter("add") != null ) {
+ addPurchases( request, purchases );
+ out.println(
+ "<h1>Purchase added. Please continue</h1>");
+ } else {
+ if ( request.getParameter("clear") != null )
+ for (int i=0; i<purchases.length; i++)
+ purchases[i] = 0;
+ out.println("<h1> Please Select Your Items! </h1>");
+ }
+ doForm( out, request.getRequestURI() );
+ }
+ showPurchases( out, purchases );
+ out.close();
+ }
+ void addPurchases( HttpServletRequest request, int [] purchases ) {
+ for (int i=0; i<items.length; i++) {
+ String added = request.getParameter( items[i] );
+ if ( added !=null && !added.equals("") )
+ purchases[i] += Integer.parseInt( added );
+ }
+ }
+ void doForm( PrintWriter out, String requestURI ) {
+ out.println( "<form method=POST action="+ requestURI +">" );
+ for(int i=0;i< items.length;i++)
+ out.println( "Quantity <input name=\"" + items[i]+ "\" value=0 size=3> of:
+" + items[i] + "<br>");
+ out.println(
+ "<p><input type=submit name=add value=\"Add To Cart\">"
+ + "<input type=submit name=checkout value=\"Check Out\">"
+ + "<input type=submit name=clear value=\"Clear Cart\">"
+ + "</form>" );
+ }
+ void showPurchases( PrintWriter out, int [] purchases )
+ throws IOException {
+ out.println("<hr><h2>Your Shopping Basket</h2>");
+ for (int i=0; i<items.length; i++)
+ if ( purchases[i] != 0 )
+ out.println( purchases[i] +" "+ items[i] +"<br>" );
+ }
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on
+the + sign on
+//the left to edit the code.">
+ @Override
+ protected void doGet(HttpServletRequest request, HttpServletResponse
+response)
+ throws ServletException, IOException {
+ processRequest(request, response);
+ }
+ @Override
+ protected void doPost(HttpServletRequest request, HttpServletResponse
+response)
+ throws ServletException, IOException {
+ processRequest(request, response);
+ }
+ @Override
+ public String getServletInfo() {
+ return "Short description";
+ }// </editor-fold>
+}
+
+----------------------------------------------------------
+-----------------------------------------------------
+
